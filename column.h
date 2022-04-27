@@ -10,13 +10,10 @@ class Column
 public:
     Column(QPoint column_point);
 
-    void DrawColumn(QPainter *painter, QBrush upper_brush, QBrush lower_brush);
+    void DrawColumn(QPainter *painter, QPoint point, QImage lower_image, QImage upper_image);
 
     QRect higher_rect;
     QRect lower_rect;
-    
-private:
-    QPoint column_point;
 };
 
 #endif // COLUMN_H
