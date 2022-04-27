@@ -2,6 +2,7 @@
 #define FLAPPYBIRD_H
 
 #include <column.h>
+#include <bird.h>
 
 #include <QMainWindow>
 #include <QPainter>
@@ -28,15 +29,21 @@ public:
 
     void keyPressEvent(QKeyEvent *event);
 
+    void keyReleaseEvent(QKeyEvent *event);
+
     void paintEvent(QPaintEvent *event);
 
 public slots:
     void MoveColumn();
+    void MoveBird();
 
 private:
     Ui::FlappyBird *ui;
     std::vector<QPoint> points;
+    QPoint point_for_bird;
     int x_column_pace = 0;
+    int bird_pace = 0;
+    int radius = 25;
 };
 
 #endif // FLAPPYBIRD_H
