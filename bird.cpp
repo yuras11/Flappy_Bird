@@ -1,11 +1,49 @@
 #include "bird.h"
 
-Bird::Bird(QPoint point_for_bird)
+Bird::Bird(): point_for_bird(200, 300)
 {
-    rect.setRect(point_for_bird.x(), point_for_bird.y(), 2*radius, 2*radius);
+    QImage first_image("C:/Users/Yuriy Kozlov/Documents/flappybird/bird_pictures/yellow_bird/first.png");
+    bird_images.push_back(first_image);
+    bird_images.push_back(first_image);
+    bird_images.push_back(first_image);
+    QImage second_image("C:/Users/Yuriy Kozlov/Documents/flappybird/bird_pictures/yellow_bird/second.png");
+    bird_images.push_back(second_image);
+    bird_images.push_back(second_image);
+    bird_images.push_back(second_image);
+    QImage third_image("C:/Users/Yuriy Kozlov/Documents/flappybird/bird_pictures/yellow_bird/third.png");
+    bird_images.push_back(third_image);
+    bird_images.push_back(third_image);
+    bird_images.push_back(third_image);
+    QImage forth_image("C:/Users/Yuriy Kozlov/Documents/flappybird/bird_pictures/yellow_bird/forth.png");
+    bird_images.push_back(forth_image);
+    bird_images.push_back(forth_image);
+    bird_images.push_back(third_image);
+
+    main_image = bird_images[0];
 }
 
-void Bird::DrawBird(QPainter *painter, QPoint point, QImage image)
+void Bird::DrawBird(QPainter *painter)
 {
-    painter->drawImage(point, image);
+    painter->drawImage(point_for_bird, main_image);
+}
+
+void Bird::BirdAnimation()
+{
+    index = (index + 1) % 12;
+    main_image = bird_images[index];
+}
+
+void Bird::SetMainImage(QImage image)
+{
+    main_image = image;
+}
+
+void Bird::SetBirdPaceOfFall(int pace)
+{
+   bird_pace_of_fall = pace;
+}
+
+void Bird::SetHeightOfJump(int height)
+{
+    height_of_jump = -height;
 }
