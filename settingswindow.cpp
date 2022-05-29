@@ -2,11 +2,9 @@
 #include "ui_settingswindow.h"
 #include "bird.h"
 
-#include <QRect>
-
-SettingsWindow::SettingsWindow(QWidget *parent) 
-  : QDialog(parent)
-  , ui(new Ui::SettingsWindow)
+SettingsWindow::SettingsWindow(QWidget *parent) :
+    QDialog(parent)
+  ,  ui(new Ui::SettingsWindow)
   , main_background_image("C:/Users/Yuriy Kozlov/Documents/flappybird/background-day.png")
 
 {
@@ -103,4 +101,35 @@ void SettingsWindow::on_ClearBackgroundButton_clicked()
 {
     ui->LineForBackground->clear();
     ui->LineForBackground->grabKeyboard();
+}
+
+void SettingsWindow::on_ChangeBirdSkinButton_clicked()
+{
+    std::vector<QString> skins;
+
+    skins.push_back(ui->LineForFirstBirdPicture->text());
+    skins.push_back(ui->LineForFirstBirdPicture->text());
+    skins.push_back(ui->LineForFirstBirdPicture->text());
+
+    skins.push_back(ui->LineForSecondBirdPicture->text());
+    skins.push_back(ui->LineForSecondBirdPicture->text());
+    skins.push_back(ui->LineForSecondBirdPicture->text());
+
+    skins.push_back(ui->LineForThirdBirdPicture->text());
+    skins.push_back(ui->LineForThirdBirdPicture->text());
+    skins.push_back(ui->LineForThirdBirdPicture->text());
+
+    skins.push_back(ui->LineForForthBirdPicture->text());
+    skins.push_back(ui->LineForForthBirdPicture->text());
+    skins.push_back(ui->LineForForthBirdPicture->text());
+
+    emit SignalForBirdSkin(skins);
+}
+
+void SettingsWindow::on_ClearBirdButton_clicked()
+{
+    ui->LineForFirstBirdPicture->clear();
+    ui->LineForSecondBirdPicture->clear();
+    ui->LineForThirdBirdPicture->clear();
+    ui->LineForForthBirdPicture->clear();
 }
