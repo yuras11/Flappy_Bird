@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SettingsWindow</class>
+ <widget class="QDialog" name="SettingsWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>815</width>
+    <height>592</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QSlider" name="HeightOfJumpSlider">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>130</y>
+     <width>221</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="ReturnButton">
+   <property name="geometry">
+    <rect>
+     <x>620</x>
+     <y>470</y>
+     <width>151</width>
+     <height>81</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Return to game</string>
+   </property>
+  </widget>
+  <widget class="QSlider" name="ColumnPaceSlider">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>230</y>
+     <width>221</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="QSlider" name="PaceOfFallSlider">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>330</y>
+     <width>221</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="LineForBackground">
+   <property name="geometry">
+    <rect>
+     <x>370</x>
+     <y>130</y>
+     <width>411</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="locale">
+    <locale language="English" country="UnitedStates"/>
+   </property>
+   <property name="inputMethodHints">
+    <set>Qt::ImhNone</set>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="ButtonForBackground">
+   <property name="geometry">
+    <rect>
+     <x>370</x>
+     <y>180</y>
+     <width>411</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Change background</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="ClearBackgroundButton">
+   <property name="geometry">
+    <rect>
+     <x>370</x>
+     <y>230</y>
+     <width>411</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Clear</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
