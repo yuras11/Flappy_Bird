@@ -38,6 +38,10 @@ private slots:
 
     void on_ClearBackgroundButton_clicked();
 
+    void on_ChangeBirdSkinButton_clicked();
+
+    void on_ClearBirdButton_clicked();
+
 signals:
     void SignalForHeightOfJump(int height_of_jump);
 
@@ -46,6 +50,8 @@ signals:
     void SignalForBirdPaceOfFall(int pace);
 
     void SignalForBackgroundImage(QImage image);
+
+    void SignalForBirdSkin(std::vector<QString> &skins);
 
 private:
     Ui::SettingsWindow *ui;
