@@ -33,9 +33,9 @@ void Bird::BirdAnimation()
     main_image = bird_images[index];
 }
 
-void Bird::SetMainImage(QImage image)
+void Bird::SetBirdImages(std::vector<QImage> &skins)
 {
-    main_image = image;
+    bird_images = skins;
 }
 
 void Bird::SetBirdPaceOfFall(int pace)
