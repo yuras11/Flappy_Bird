@@ -19,7 +19,7 @@ public:
 
     void BirdAnimation();
 
-    void SetMainImage(QImage image);
+    void SetBirdImages(std::vector<QImage> &skins);
 
     void SetBirdPaceOfFall(int pace);
 
