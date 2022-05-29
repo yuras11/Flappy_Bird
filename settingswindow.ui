@@ -29,10 +29,10 @@
   <widget class="QPushButton" name="ReturnButton">
    <property name="geometry">
     <rect>
-     <x>620</x>
-     <y>470</y>
-     <width>151</width>
-     <height>81</height>
+     <x>0</x>
+     <y>560</y>
+     <width>811</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="text">
@@ -68,8 +68,8 @@
   <widget class="QLineEdit" name="LineForBackground">
    <property name="geometry">
     <rect>
-     <x>370</x>
-     <y>130</y>
+     <x>360</x>
+     <y>100</y>
      <width>411</width>
      <height>31</height>
     </rect>
@@ -87,9 +87,9 @@
   <widget class="QPushButton" name="ButtonForBackground">
    <property name="geometry">
     <rect>
-     <x>370</x>
-     <y>180</y>
-     <width>411</width>
+     <x>360</x>
+     <y>140</y>
+     <width>201</width>
      <height>31</height>
     </rect>
    </property>
@@ -100,15 +100,94 @@
   <widget class="QPushButton" name="ClearBackgroundButton">
    <property name="geometry">
     <rect>
-     <x>370</x>
-     <y>230</y>
-     <width>411</width>
-     <height>29</height>
+     <x>570</x>
+     <y>140</y>
+     <width>201</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="text">
     <string>Clear</string>
    </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox">
+   <property name="geometry">
+    <rect>
+     <x>360</x>
+     <y>190</y>
+     <width>411</width>
+     <height>221</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Bird's skin </string>
+   </property>
+   <widget class="QLineEdit" name="LineForFirstBirdPicture">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>391</width>
+      <height>26</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="LineForSecondBirdPicture">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>70</y>
+      <width>391</width>
+      <height>26</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="LineForThirdBirdPicture">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>110</y>
+      <width>391</width>
+      <height>26</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="LineForForthBirdPicture">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>150</y>
+      <width>391</width>
+      <height>26</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ChangeBirdSkinButton">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>180</y>
+      <width>191</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Change skin</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ClearBirdButton">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>180</y>
+      <width>191</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Clear all</string>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>
