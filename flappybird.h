@@ -19,6 +19,7 @@
 #include <QString>
 #include <QFont>
 
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class FlappyBird; }
 QT_END_NAMESPACE
@@ -76,6 +77,8 @@ public slots:
     void SlotForBirdPaceOfFall(int pace);
 
     void SlotForBackgroundImage(QImage image);
+
+    void SlotForBirdSkin(std::vector<QString> &skins);
 
 private:
     Ui::FlappyBird *ui;
