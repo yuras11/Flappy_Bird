@@ -47,6 +47,7 @@ FlappyBird::FlappyBird(QWidget *parent)
     connect(window, &SettingsWindow::SignalForColumnPace, this, &FlappyBird::SlotForColumnPace);
     connect(window, &SettingsWindow::SignalForBirdPaceOfFall, this, &FlappyBird::SlotForBirdPaceOfFall);
     connect(window, &SettingsWindow::SignalForBackgroundImage, this, &FlappyBird::SlotForBackgroundImage);
+    connect(window, &SettingsWindow::SignalForBirdSkin, this, &FlappyBird::SlotForBirdSkin);
 }
 
 void FlappyBird::MoveColumn()
@@ -319,4 +320,15 @@ void FlappyBird::SlotForBirdPaceOfFall(int pace)
 void FlappyBird::SlotForBackgroundImage(QImage image)
 {
     SetMainBackgroundImage(image);
+}
+
+void FlappyBird::SlotForBirdSkin(std::vector<QString> &skins)
+{
+    std::vector<QImage> images;
+    for(int i = 0; i < skins.size(); i++)
+    {
+        QImage image(skins[i]);
+        images.push_back(image);
+    }
+    bird.SetBirdImages(images);
 }
