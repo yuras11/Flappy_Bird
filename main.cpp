@@ -1,5 +1,5 @@
 #include "flappybird.h"
-#include "settingswindow.h"
+
 #include <QApplication>
 
 int main(int argc, char *argv[])
