@@ -2,9 +2,9 @@
 #include "ui_settingswindow.h"
 #include "bird.h"
 
-SettingsWindow::SettingsWindow(QWidget *parent) :
-    QDialog(parent)
-  ,  ui(new Ui::SettingsWindow)
+SettingsWindow::SettingsWindow(QWidget *parent)
+  : QDialog(parent)
+  , ui(new Ui::SettingsWindow)
   , main_background_image("C:/Users/Yuriy Kozlov/Documents/flappybird/background-day.png")
 
 {
@@ -12,7 +12,13 @@ SettingsWindow::SettingsWindow(QWidget *parent) :
     phrases.push_back("Change bird\'s hight of jump:");
     phrases.push_back("Change column\'s pace:");
     phrases.push_back("Change bird\'s pace of fall:");
-    phrases.push_back("Paste your reference:");
+
+    QFont font25("Courier", 25, QFont::DemiBold);
+    fonts.push_back(font25);
+    QFont font10("Courier", 10, QFont::DemiBold);
+    fonts.push_back(font10);
+    QFont font12("Courier", 12, QFont::DemiBold);
+    fonts.push_back(font12);
 
     ui->setupUi(this);
 
@@ -30,29 +36,21 @@ void SettingsWindow::paintEvent(QPaintEvent *event)
 
     painter.fillRect(0, 0, this->width(), this->height(), main_background_image);
 
+    painter.setFont(fonts[0]);
     phrases[0] = QString("%1").arg(phrases[0]);
-    QFont font("Courier", 35, QFont::DemiBold);
-    painter.setFont(font);
-    painter.drawText(270, 50, phrases[0]);
+    painter.drawText(55, 50, phrases[0]);
 
+    painter.setFont(fonts[1]);
     phrases[1] = QString("%1").arg(phrases[1]);
-    QFont font10("Courier", 10, QFont::DemiBold);
-    painter.setFont(font10);
     painter.drawText(ui->HeightOfJumpSlider->x(), ui->HeightOfJumpSlider->y()-15, phrases[1]);
 
-    QFont font12("Courier", 12, QFont::DemiBold);
-    painter.setFont(font12);
-
+    painter.setFont(fonts[2]);
     phrases[2] = QString("%1").arg(phrases[2]);
     painter.drawText(ui->ColumnPaceSlider->x(), ui->ColumnPaceSlider->y()-15, phrases[2]);
 
-    painter.setFont(font10);
+    painter.setFont(fonts[1]);
     phrases[3] = QString("%1").arg(phrases[3]);
     painter.drawText(ui->PaceOfFallSlider->x(), ui->PaceOfFallSlider->y()-15, phrases[3]);
-
-    phrases[4] = QString("%1").arg(phrases[4]);
-    painter.setFont(font12);
-    painter.drawText(ui->LineForBackground->x(), ui->LineForBackground->y()-15, phrases[4]);
 
 }
 
@@ -90,7 +88,7 @@ void SettingsWindow::on_PaceOfFallSlider_sliderMoved(int position)
 }
 
 void SettingsWindow::on_ButtonForBackground_clicked()
-{ 
+{
     QString background = ui->LineForBackground->text();
     QImage image(background);
     SetMainBackgroundImage(image);
@@ -132,4 +130,20 @@ void SettingsWindow::on_ClearBirdButton_clicked()
     ui->LineForSecondBirdPicture->clear();
     ui->LineForThirdBirdPicture->clear();
     ui->LineForForthBirdPicture->clear();
+}
+
+void SettingsWindow::on_ChangeColumnPicturesButton_clicked()
+{
+    std::vector<QString> pictures;
+
+    pictures.push_back(ui->LineForUpperColumnPicture->text());
+    pictures.push_back(ui->LineForLowerColumnPicture->text());
+
+    emit SignalForColumnPictures(pictures);
+}
+
+void SettingsWindow::on_ClearColumnPicturesButton_clicked()
+{
+    ui->LineForLowerColumnPicture->clear();
+    ui->LineForLowerColumnPicture->clear();
 }
