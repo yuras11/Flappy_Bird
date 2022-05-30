@@ -56,9 +56,9 @@ public slots:
 
     void StartGame();
 
-    void SetColumnPace(int pace);
-
     void SetMainBackgroundImage(QImage image);
+
+    void SetColumnPictures(std::vector<QImage> &pictures);
 
 private slots:
     void on_StartGameButton_clicked();
@@ -80,20 +80,23 @@ public slots:
 
     void SlotForBirdSkin(std::vector<QString> &skins);
 
+    void SlotForColumnPictures(std::vector<QString> &pictures);
+
 private:
     Ui::FlappyBird *ui;
-    std::vector<QPoint> points;
+    std::vector<QPoint> points_for_columns;
     Bird bird;
+    Column column;
+    Basement basement;
     std::vector<QPoint> points_for_basement;
     QString score;
     QString best_score;
     std::vector<QString> phrases;
     QImage main_background_image;
     SettingsWindow *window = new SettingsWindow;
+    std::vector<QImage> column_pictures;
 
 private:
-    int basement_pace = -4;
-    int x_column_pace = -4;
     int counter = 0;
     int counter_for_best_score = 0;
     bool death = false;
