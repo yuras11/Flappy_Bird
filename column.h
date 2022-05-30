@@ -7,15 +7,17 @@
 class Column
 {
 public:
-    Column(QPoint column_point);
+    Column() = default;
 
     ~Column() = default;
 
-    void DrawColumn(QPainter *painter, QImage lower_image, QImage upper_image);
+    void DrawColumn(QPainter *painter, QPoint point, QImage lower_image, QImage upper_image);
 
-private:
-    QRect higher_rect;
-    QRect lower_rect;
+    void SetColumnPace(int pace);
+
+public:
+    QRect upper_column, lower_column;
+    int column_pace = -4;
 };
 
 #endif // COLUMN_H
