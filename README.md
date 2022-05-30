@@ -1,1 +1,1 @@
-# FlappyBird version with settings and possibilities to change bird's skin and background image.
+# FlappyBird version with settings and possibilities to load own pictures for bird, columns and background.
