@@ -42,6 +42,10 @@ private slots:
 
     void on_ClearBirdButton_clicked();
 
+    void on_ChangeColumnPicturesButton_clicked();
+
+    void on_ClearColumnPicturesButton_clicked();
+
 signals:
     void SignalForHeightOfJump(int height_of_jump);
 
@@ -53,9 +57,12 @@ signals:
 
     void SignalForBirdSkin(std::vector<QString> &skins);
 
+    void SignalForColumnPictures(std::vector<QString> &pictures);
+
 private:
     Ui::SettingsWindow *ui;
     std::vector<QString> phrases;
+    std::vector<QFont> fonts;
     QImage main_background_image;
 };
 
