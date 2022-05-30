@@ -9,15 +9,18 @@
 class Basement
 {
 public:
-
-    Basement(QPoint point_for_basement);
+    Basement();
 
     ~Basement() = default;
 
-    void DrawBasement(QPainter* painter, QImage image);
+    void DrawBasement(QPainter* painter, QPoint point);
+
+    void SetBasementPace(int pace);
 
 public:
     QRect rect_for_basement;
+    QImage image_for_basement;
+    int basement_pace = -4;
 };
 
 #endif // BASEMENT_H
