@@ -1,20 +1,22 @@
 #include "column.h"
 
-Column::Column(QPoint column_point)
+void Column::DrawColumn(QPainter *painter, QPoint point, QImage lower_image, QImage upper_image)
 {
-    higher_rect.setX(column_point.x()-25);
-    higher_rect.setY(column_point.y()-747);
-    higher_rect.setWidth(70);
-    higher_rect.setHeight(697);
+     upper_column.setX(point.x()-25);
+     upper_column.setY(point.y()-upper_image.height());
+     upper_column.setHeight(upper_image.height()-50);
+     upper_column.setWidth(70);
 
-    lower_rect.setX(column_point.x()-25);
-    lower_rect.setY(column_point.y()+70);
-    lower_rect.setWidth(70);
-    lower_rect.setHeight(547);
+     lower_column.setX(point.x()-25);
+     lower_column.setY(point.y()+70);
+     lower_column.setHeight(lower_image.height());
+     lower_column.setWidth(70);
+
+     painter->drawImage(upper_column, upper_image);
+     painter->drawImage(lower_column, lower_image);
 }
 
-void Column::DrawColumn(QPainter *painter, QImage lower_image, QImage upper_image)
+void Column::SetColumnPace(int pace)
 {
-     painter->drawImage(higher_rect, upper_image);
-     painter->drawImage(lower_rect, lower_image);
+    column_pace = -pace;
 }
