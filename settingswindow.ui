@@ -29,10 +29,10 @@
   <widget class="QPushButton" name="ReturnButton">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>560</y>
-     <width>811</width>
-     <height>31</height>
+     <x>30</x>
+     <y>440</y>
+     <width>271</width>
+     <height>71</height>
     </rect>
    </property>
    <property name="text">
@@ -65,56 +65,11 @@
     <enum>Qt::Horizontal</enum>
    </property>
   </widget>
-  <widget class="QLineEdit" name="LineForBackground">
+  <widget class="QGroupBox" name="BirdSkinGroupBox">
    <property name="geometry">
     <rect>
      <x>360</x>
-     <y>100</y>
-     <width>411</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="locale">
-    <locale language="English" country="UnitedStates"/>
-   </property>
-   <property name="inputMethodHints">
-    <set>Qt::ImhNone</set>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="ButtonForBackground">
-   <property name="geometry">
-    <rect>
-     <x>360</x>
-     <y>140</y>
-     <width>201</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Change background</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="ClearBackgroundButton">
-   <property name="geometry">
-    <rect>
-     <x>570</x>
-     <y>140</y>
-     <width>201</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Clear</string>
-   </property>
-  </widget>
-  <widget class="QGroupBox" name="groupBox">
-   <property name="geometry">
-    <rect>
-     <x>360</x>
-     <y>190</y>
+     <y>170</y>
      <width>411</width>
      <height>221</height>
     </rect>
@@ -186,6 +141,123 @@
     </property>
     <property name="text">
      <string>Clear all</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="ColumnPicturesGroupBox">
+   <property name="geometry">
+    <rect>
+     <x>360</x>
+     <y>400</y>
+     <width>411</width>
+     <height>141</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Column pictures</string>
+   </property>
+   <widget class="QLineEdit" name="LineForUpperColumnPicture">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>391</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ChangeColumnPicturesButton">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>100</y>
+      <width>191</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Change picture</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ClearColumnPicturesButton">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>100</y>
+      <width>191</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Clear all</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="LineForLowerColumnPicture">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>60</y>
+      <width>391</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="BackgroundGroupBox">
+   <property name="geometry">
+    <rect>
+     <x>360</x>
+     <y>50</y>
+     <width>411</width>
+     <height>111</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Background image</string>
+   </property>
+   <widget class="QLineEdit" name="LineForBackground">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>30</y>
+      <width>411</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="locale">
+     <locale language="English" country="UnitedStates"/>
+    </property>
+    <property name="inputMethodHints">
+     <set>Qt::ImhNone</set>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ButtonForBackground">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>70</y>
+      <width>201</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Change background</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ClearBackgroundButton">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>70</y>
+      <width>201</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Clear</string>
     </property>
    </widget>
   </widget>
