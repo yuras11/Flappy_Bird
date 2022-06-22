@@ -1,6 +1,6 @@
 #include "settingswindow.h"
 #include "ui_settingswindow.h"
-#include "bird.h"
+
 
 SettingsWindow::SettingsWindow(QWidget *parent)
   : QDialog(parent)
@@ -28,6 +28,18 @@ SettingsWindow::SettingsWindow(QWidget *parent)
     ui->ColumnPaceSlider->setValue(4);
     ui->PaceOfFallSlider->setRange(1, 5);
     ui->PaceOfFallSlider->setValue(1);
+
+    ui->BirdSkinListView->setViewMode(QListView::ListMode);
+
+    for(int i = 0; i < bird.bird_images.size(); i++)
+    {
+        bird_pictures_list << bird.bird_images[i];
+    }
+
+    model = new QStringListModel(bird_pictures_list, parent);
+
+    ui->BirdSkinListView->setModel(model);
+
 }
 
 void SettingsWindow::paintEvent(QPaintEvent *event)
@@ -54,9 +66,14 @@ void SettingsWindow::paintEvent(QPaintEvent *event)
 
 }
 
-void SettingsWindow::SetMainBackgroundImage(QImage image)
+void SettingsWindow::SetMainBackgroundImage(const QImage &image)
 {
     main_background_image = image;
+}
+
+bool SettingsWindow::ColumnLinesAreEpmty()
+{
+    return ui->LineForLowerColumnPicture->text() == "" && ui->LineForUpperColumnPicture->text() == "" ? true: false;
 }
 
 SettingsWindow::~SettingsWindow()
@@ -66,7 +83,14 @@ SettingsWindow::~SettingsWindow()
 
 void SettingsWindow::on_ReturnButton_clicked()
 {
-    this->hide();
+    if(!bird_pictures_list.isEmpty())
+    {
+        this->hide();
+    }
+    else
+    {
+        QMessageBox::critical(this, "Warning", "Cannot initialize the bird without any pictures");
+    }
 }
 
 void SettingsWindow::on_HeightOfJumpSlider_sliderMoved(int position)
@@ -89,10 +113,17 @@ void SettingsWindow::on_PaceOfFallSlider_sliderMoved(int position)
 
 void SettingsWindow::on_ButtonForBackground_clicked()
 {
-    QString background = ui->LineForBackground->text();
-    QImage image(background);
-    SetMainBackgroundImage(image);
-    emit SignalForBackgroundImage(image);
+    if(ui->LineForBackground->text() != "")
+    {
+        QString background = ui->LineForBackground->text();
+        QImage image(background);
+        SetMainBackgroundImage(image);
+        emit SignalForBackgroundImage(image);
+    }
+    else
+    {
+        QMessageBox::critical(this, "Warning", "Cannot initialize background without a picture");
+    }
 }
 
 void SettingsWindow::on_ClearBackgroundButton_clicked()
@@ -101,49 +132,64 @@ void SettingsWindow::on_ClearBackgroundButton_clicked()
     ui->LineForBackground->grabKeyboard();
 }
 
-void SettingsWindow::on_ChangeBirdSkinButton_clicked()
-{
-    std::vector<QString> skins;
-
-    skins.push_back(ui->LineForFirstBirdPicture->text());
-    skins.push_back(ui->LineForFirstBirdPicture->text());
-    skins.push_back(ui->LineForFirstBirdPicture->text());
-
-    skins.push_back(ui->LineForSecondBirdPicture->text());
-    skins.push_back(ui->LineForSecondBirdPicture->text());
-    skins.push_back(ui->LineForSecondBirdPicture->text());
-
-    skins.push_back(ui->LineForThirdBirdPicture->text());
-    skins.push_back(ui->LineForThirdBirdPicture->text());
-    skins.push_back(ui->LineForThirdBirdPicture->text());
-
-    skins.push_back(ui->LineForForthBirdPicture->text());
-    skins.push_back(ui->LineForForthBirdPicture->text());
-    skins.push_back(ui->LineForForthBirdPicture->text());
-
-    emit SignalForBirdSkin(skins);
-}
-
-void SettingsWindow::on_ClearBirdButton_clicked()
-{
-    ui->LineForFirstBirdPicture->clear();
-    ui->LineForSecondBirdPicture->clear();
-    ui->LineForThirdBirdPicture->clear();
-    ui->LineForForthBirdPicture->clear();
-}
-
 void SettingsWindow::on_ChangeColumnPicturesButton_clicked()
 {
     std::vector<QString> pictures;
 
-    pictures.push_back(ui->LineForUpperColumnPicture->text());
-    pictures.push_back(ui->LineForLowerColumnPicture->text());
+    if(!ColumnLinesAreEpmty())
+    {
+        pictures.push_back(ui->LineForUpperColumnPicture->text());
+        pictures.push_back(ui->LineForLowerColumnPicture->text());
 
-    emit SignalForColumnPictures(pictures);
+        emit SignalForColumnPictures(pictures);
+    }
+    else
+    {
+        QMessageBox::critical(this, "Warning", "Cannot initialize columns without any pictures");
+    }
 }
 
 void SettingsWindow::on_ClearColumnPicturesButton_clicked()
 {
     ui->LineForLowerColumnPicture->clear();
     ui->LineForLowerColumnPicture->clear();
+}
+
+void SettingsWindow::on_ChooseBirdPictureButton_clicked()
+{
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open file"), QDir::currentPath());
+    if(!fileName.isEmpty())
+    {
+        bird_pictures_list << fileName;
+        model = new QStringListModel(bird_pictures_list);
+        ui->BirdSkinListView->setModel(model);
+    }
+
+}
+
+void SettingsWindow::on_ClearButton_clicked()
+{
+    bird_pictures_list.clear();
+    model = new QStringListModel(bird_pictures_list);
+    ui->BirdSkinListView->setModel(model);
+}
+
+
+void SettingsWindow::on_SetBirdSkinButton_clicked()
+{
+    std::vector<QString> pictures;
+
+    if(bird_pictures_list.isEmpty())
+    {
+        QMessageBox::critical(this, "Warning", "Cannot initialize the bird without any pictures");
+    }
+
+    if(!bird_pictures_list.isEmpty())
+    {
+        for(int i = 0; i < bird_pictures_list.size(); i++)
+        {
+            pictures.push_back(bird_pictures_list[i]);
+        }
+        emit SignalForSettingBirdPictures(pictures);
+    }
 }
