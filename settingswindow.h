@@ -7,6 +7,12 @@
 #include <string>
 #include <QFont>
 #include <vector>
+#include <QAbstractItemModel>
+#include <QStringListModel>
+#include <QFileDialog>
+#include <QMessageBox>
+
+#include "bird.h"
 
 namespace Ui {
 class SettingsWindow;
@@ -23,7 +29,9 @@ public:
 
     void paintEvent(QPaintEvent *event);
 
-    void SetMainBackgroundImage(QImage image);
+    void SetMainBackgroundImage(const QImage &image);
+
+    bool ColumnLinesAreEpmty();
 
 private slots:
     void on_ReturnButton_clicked();
@@ -38,13 +46,15 @@ private slots:
 
     void on_ClearBackgroundButton_clicked();
 
-    void on_ChangeBirdSkinButton_clicked();
-
-    void on_ClearBirdButton_clicked();
-
     void on_ChangeColumnPicturesButton_clicked();
 
     void on_ClearColumnPicturesButton_clicked();
+
+    void on_ChooseBirdPictureButton_clicked();
+
+    void on_ClearButton_clicked();
+
+    void on_SetBirdSkinButton_clicked();
 
 signals:
     void SignalForHeightOfJump(int height_of_jump);
@@ -53,17 +63,20 @@ signals:
 
     void SignalForBirdPaceOfFall(int pace);
 
-    void SignalForBackgroundImage(QImage image);
+    void SignalForBackgroundImage(const QImage &image);
 
-    void SignalForBirdSkin(std::vector<QString> &skins);
+    void SignalForColumnPictures(const std::vector<QString> &pictures);
 
-    void SignalForColumnPictures(std::vector<QString> &pictures);
+    void SignalForSettingBirdPictures(const std::vector<QString> &pictures);
 
 private:
     Ui::SettingsWindow *ui;
     std::vector<QString> phrases;
     std::vector<QFont> fonts;
     QImage main_background_image;
+    Bird bird;
+    QStringList bird_pictures_list;
+    QAbstractItemModel *model;
 };
 
 #endif // SETTINGSWINDOW_H
