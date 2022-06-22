@@ -15,12 +15,15 @@ public:
 
     void DrawBasement(QPainter* painter, QPoint point);
 
+    void MoveBasement();
+
     void SetBasementPace(int pace);
 
 public:
+    std::vector<QPoint> points_for_basement;
     QRect rect_for_basement;
     QImage image_for_basement;
-    int basement_pace = -4;
+    int basement_pace;
 };
 
 #endif // BASEMENT_H
