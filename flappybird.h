@@ -37,7 +37,6 @@ public:
     void paintEvent(QPaintEvent *event);
 
 public slots:
-
     void MoveBasement();
 
     void BeforeStartTheGame();
@@ -48,11 +47,7 @@ public slots:
 
     void SetStartingCoordinates();
 
-    void IncreaseCounter();
-
-    void SetMainBackgroundImage(QImage image);
-
-    void SetColumnPictures(std::vector<QImage> &pictures);
+    void SetMainBackgroundImage(const QImage &image);
 
 private slots:
     void on_StartGameButton_clicked();
@@ -81,23 +76,18 @@ private:
     Bird bird;
     Column column;
     Basement basement;
+    SettingsWindow *window;
     QString score;
     QString best_score;
     std::vector<QString> phrases;
     QImage main_background_image;
-    SettingsWindow *window;
-    std::vector<QImage> column_pictures;
-
-private:
-    int counter = 0;
-    int counter_for_best_score = 0;
-    bool death = false;
-    bool intersection = false;
-
-private:
-    QTimer* starting_bird_timer = new QTimer(this);
-    QTimer* basement_timer = new QTimer(this);
-    QTimer* main_timer = new QTimer(this);
+    int counter;
+    int counter_for_best_score;
+    bool death;
+    bool intersection;
+    QTimer* starting_bird_timer;
+    QTimer* basement_timer;
+    QTimer* main_timer;
 };
 
 #endif // FLAPPYBIRD_H
