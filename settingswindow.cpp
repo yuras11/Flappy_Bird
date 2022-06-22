@@ -1,7 +1,6 @@
 #include "settingswindow.h"
 #include "ui_settingswindow.h"
 
-
 SettingsWindow::SettingsWindow(QWidget *parent)
   : QDialog(parent)
   , ui(new Ui::SettingsWindow)
@@ -37,9 +36,7 @@ SettingsWindow::SettingsWindow(QWidget *parent)
     }
 
     model = new QStringListModel(bird_pictures_list, parent);
-
     ui->BirdSkinListView->setModel(model);
-
 }
 
 void SettingsWindow::paintEvent(QPaintEvent *event)
@@ -63,7 +60,6 @@ void SettingsWindow::paintEvent(QPaintEvent *event)
     painter.setFont(fonts[1]);
     phrases[3] = QString("%1").arg(phrases[3]);
     painter.drawText(ui->PaceOfFallSlider->x(), ui->PaceOfFallSlider->y()-15, phrases[3]);
-
 }
 
 void SettingsWindow::SetMainBackgroundImage(const QImage &image)
@@ -173,7 +169,6 @@ void SettingsWindow::on_ClearButton_clicked()
     model = new QStringListModel(bird_pictures_list);
     ui->BirdSkinListView->setModel(model);
 }
-
 
 void SettingsWindow::on_SetBirdSkinButton_clicked()
 {
