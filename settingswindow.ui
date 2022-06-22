@@ -71,76 +71,59 @@
      <x>360</x>
      <y>170</y>
      <width>411</width>
-     <height>221</height>
+     <height>231</height>
     </rect>
    </property>
    <property name="title">
     <string>Bird's skin </string>
    </property>
-   <widget class="QLineEdit" name="LineForFirstBirdPicture">
+   <widget class="QListView" name="BirdSkinListView">
     <property name="geometry">
      <rect>
       <x>10</x>
       <y>30</y>
       <width>391</width>
-      <height>26</height>
+      <height>111</height>
      </rect>
     </property>
    </widget>
-   <widget class="QLineEdit" name="LineForSecondBirdPicture">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>70</y>
-      <width>391</width>
-      <height>26</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="LineForThirdBirdPicture">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>110</y>
-      <width>391</width>
-      <height>26</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="LineForForthBirdPicture">
+   <widget class="QPushButton" name="ChooseBirdPictureButton">
     <property name="geometry">
      <rect>
       <x>10</x>
       <y>150</y>
-      <width>391</width>
-      <height>26</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="ChangeBirdSkinButton">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>180</y>
       <width>191</width>
-      <height>29</height>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
-     <string>Change skin</string>
+     <string>Choose picture</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="ClearBirdButton">
+   <widget class="QPushButton" name="ClearButton">
     <property name="geometry">
      <rect>
       <x>210</x>
-      <y>180</y>
+      <y>150</y>
       <width>191</width>
-      <height>29</height>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
-     <string>Clear all</string>
+     <string>Clear</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="SetBirdSkinButton">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>190</y>
+      <width>391</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Set skin</string>
     </property>
    </widget>
   </widget>
