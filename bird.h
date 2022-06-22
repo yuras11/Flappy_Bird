@@ -25,6 +25,8 @@ public:
 
     void SetHeightOfJump(int height);
 
+    void SetStartingBirdCoordinates();
+
     void MoveBird();
 
     void MoveBirdBeforeStartingTheGame();
@@ -33,12 +35,12 @@ public:
     std::vector<QString> bird_images;
     QPoint point_for_bird;
     QString main_image;
-    int radius = 25;
-    int index = 0;
-    int height_of_jump = -10;
-    int bird_pace = -10;
-    int bird_pace_of_fall = 1;
-    int starting_bird_pace = -2;
+    int radius;
+    int index;
+    int height_of_jump;
+    int bird_pace;
+    int bird_pace_of_fall;
+    int starting_bird_pace;
 };
 
 #endif // BIRD_H
