@@ -19,7 +19,6 @@
 #include <QString>
 #include <QFont>
 
-
 QT_BEGIN_NAMESPACE
 namespace Ui { class FlappyBird; }
 QT_END_NAMESPACE
@@ -38,23 +37,18 @@ public:
     void paintEvent(QPaintEvent *event);
 
 public slots:
-    void MoveColumn();
-
-    void MoveBird();
-
-    void MoveBirdBeforeStartingTheGame();
 
     void MoveBasement();
 
-    void CheckIntersections();
+    void BeforeStartTheGame();
+
+    void StartGame();
+
+    void DeathCase();
 
     void SetStartingCoordinates();
 
     void IncreaseCounter();
-
-    void DeathCase();
-
-    void StartGame();
 
     void SetMainBackgroundImage(QImage image);
 
@@ -76,36 +70,34 @@ public slots:
 
     void SlotForBirdPaceOfFall(int pace);
 
-    void SlotForBackgroundImage(QImage image);
+    void SlotForBackgroundImage(const QImage &image);
 
-    void SlotForBirdSkin(std::vector<QString> &skins);
+    void SlotForColumnPictures(const std::vector<QString> &pictures);
 
-    void SlotForColumnPictures(std::vector<QString> &pictures);
+    void SlotForSettingBirdPictures(const std::vector<QString> &pictures);
 
 private:
     Ui::FlappyBird *ui;
-    std::vector<QPoint> points_for_columns;
     Bird bird;
     Column column;
     Basement basement;
-    std::vector<QPoint> points_for_basement;
     QString score;
     QString best_score;
     std::vector<QString> phrases;
     QImage main_background_image;
-    SettingsWindow *window = new SettingsWindow;
+    SettingsWindow *window;
     std::vector<QImage> column_pictures;
 
 private:
     int counter = 0;
     int counter_for_best_score = 0;
     bool death = false;
+    bool intersection = false;
 
 private:
-    QTimer* column_timer = new QTimer(this);
-    QTimer* bird_timer = new QTimer(this);
     QTimer* starting_bird_timer = new QTimer(this);
     QTimer* basement_timer = new QTimer(this);
+    QTimer* main_timer = new QTimer(this);
 };
 
 #endif // FLAPPYBIRD_H
