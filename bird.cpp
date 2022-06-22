@@ -1,17 +1,18 @@
 #include "bird.h"
 
-Bird::Bird(): point_for_bird(200, 300)
+Bird::Bird(): point_for_bird(200, 300), radius(25),
+              index(0), height_of_jump(-10), bird_pace(-10),
+              bird_pace_of_fall(1), starting_bird_pace(-2)
 {
     QString fileName("C:/Users/Yuriy Kozlov/Documents/flappybird/bird_pictures/yellow_bird/first.png");
     bird_images.push_back(fileName);
+    main_image = fileName;          
     fileName = "C:/Users/Yuriy Kozlov/Documents/flappybird/bird_pictures/yellow_bird/second.png";
     bird_images.push_back(fileName);
     fileName = "C:/Users/Yuriy Kozlov/Documents/flappybird/bird_pictures/yellow_bird/third.png";
     bird_images.push_back(fileName);
     fileName = "C:/Users/Yuriy Kozlov/Documents/flappybird/bird_pictures/yellow_bird/forth.png";
     bird_images.push_back(fileName);
-
-    main_image = fileName;
 }
 
 void Bird::DrawBird(QPainter *painter)
@@ -40,6 +41,13 @@ void Bird::SetBirdPaceOfFall(int pace)
 void Bird::SetHeightOfJump(int height)
 {
     height_of_jump = -height;
+}
+
+void Bird::SetStartingBirdCoordinates()
+{
+    point_for_bird.setX(200);
+    point_for_bird.setY(300);
+    bird_pace = -10;
 }
 
 void Bird::MoveBird()
