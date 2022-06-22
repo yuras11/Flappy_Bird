@@ -13,7 +13,7 @@ public:
 
     ~Basement() = default;
 
-    void DrawBasement(QPainter* painter, QPoint point);
+    void DrawBasement(QPainter* painter);
 
     void MoveBasement();
 
