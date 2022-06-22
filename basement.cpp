@@ -9,14 +9,17 @@ Basement::Basement(): image_for_basement("C:/Users/Yuriy Kozlov/Documents/flappy
     }
 }
 
-void Basement::DrawBasement(QPainter* painter, QPoint point)
+void Basement::DrawBasement(QPainter* painter)
 {
-    rect_for_basement.setX(point.x());
-    rect_for_basement.setY(550);
-    rect_for_basement.setWidth(810);
-    rect_for_basement.setHeight(100);
+    for(int i = 0; i < points_for_basement.size(); i++)
+    {
+        rect_for_basement.setX(points_for_basement[i].x());
+        rect_for_basement.setY(550);
+        rect_for_basement.setWidth(810);
+        rect_for_basement.setHeight(100);
 
-    painter->drawImage(rect_for_basement, image_for_basement);
+        painter->drawImage(rect_for_basement, image_for_basement);
+    }
 }
 
 void Basement::MoveBasement()
