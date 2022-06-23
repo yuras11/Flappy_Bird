@@ -45,6 +45,8 @@ public slots:
 
     void DeathCase();
 
+    void IncreaseCounter();
+
     void SetStartingCoordinates();
 
     void SetMainBackgroundImage(const QImage &image);
@@ -73,14 +75,14 @@ public slots:
 
 private:
     Ui::FlappyBird *ui;
-    Bird bird;
-    Column column;
-    Basement basement;
+    Bird *bird;
+    Column *column;
+    Basement *basement;
     SettingsWindow *window;
     QString score;
     QString best_score;
     std::vector<QString> phrases;
-    QImage main_background_image;
+    QImage *main_background_image;
     int counter;
     int counter_for_best_score;
     bool death;
