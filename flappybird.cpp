@@ -205,20 +205,15 @@ void FlappyBird::SlotForBirdPaceOfFall(int pace)
     bird->SetBirdPaceOfFall(pace);
 }
 
-void FlappyBird::SlotForBackgroundImage(const QImage &image)
+void FlappyBird::SlotForBackgroundImage(const QString &image)
 {
-    SetMainBackgroundImage(image);
+    QImage back_image(image);
+    SetMainBackgroundImage(back_image);
 }
 
 void FlappyBird::SlotForColumnPictures(const std::vector<QString> &pictures)
 {
-    std::vector<QImage> c_pictures;
-    for(int i = 0; i < pictures.size(); i++)
-    {
-        QImage image(pictures[i]);
-        c_pictures.push_back(image);
-    }
-    column->SetColumnPictures(c_pictures);
+    column->SetColumnPictures(pictures);
 }
 
 void FlappyBird::SlotForSettingBirdPictures(const std::vector<QString> &pictures)
