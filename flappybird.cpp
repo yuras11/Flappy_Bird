@@ -5,7 +5,10 @@
 FlappyBird::FlappyBird(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::FlappyBird)
-    , main_background_image("C:/Users/Yuriy Kozlov/Documents/flappybird/background-day.png")
+    , column(new Column)
+    , bird(new Bird)
+    , basement(new Basement)
+    , main_background_image(new QImage("C:/Users/Yuriy Kozlov/Documents/flappybird/background-day.png"))
     , window(new SettingsWindow)
     , counter(0)
     , counter_for_best_score(0)
@@ -38,38 +41,38 @@ FlappyBird::FlappyBird(QWidget *parent)
 
 void FlappyBird::MoveBasement()
 {
-    basement.MoveBasement();
+    basement->MoveBasement();
     this->update();
 }
 
 void FlappyBird::BeforeStartTheGame()
 {
-    bird.MoveBirdBeforeStartingTheGame();
+    bird->MoveBirdBeforeStartingTheGame();
     this->update();
 }
 
 void FlappyBird::StartGame()
 {
     main_timer->start(25);
-    bird.MoveBird();
-    column.MoveColumn();
-    if(column.IntersectionHappened(bird))
+    bird->MoveBird();
+    column->MoveColumn();
+    if(column->IntersectionHappened(*bird))
     {
         intersection = true;
-        bird.point_for_bird.setY(bird.point_for_bird.y() + 10);
+        bird->point_for_bird->setY(bird->point_for_bird->y() + 10);
     }
-    if(bird.point_for_bird.y() + bird.radius >= 550)
+    if(bird->point_for_bird->y() + bird->radius >= 550)
     {
         DeathCase();
     }
-    column.IncreaseCounter(bird, intersection, counter);
+    IncreaseCounter();
     this->update();
 }
 
 void FlappyBird::DeathCase()
 {
     death = true;
-    bird.bird_pace = 0;
+    bird->bird_pace = 0;
     main_timer->stop();
     basement_timer->stop();
     ui->RestartButton->show();
@@ -78,32 +81,43 @@ void FlappyBird::DeathCase()
     ui->RestartButton->grabKeyboard();
 }
 
+void FlappyBird::IncreaseCounter()
+{
+    for(int i = 0; i < 4; i++)
+    {
+        if(!intersection && bird->point_for_bird->x() > column->points_for_columns[i].x()+column->column_pace-1 &&
+           bird->point_for_bird->x() < column->points_for_columns[i].x())
+        {
+            counter++;
+        }
+    }
+}
+
 void FlappyBird::SetStartingCoordinates()
 {
     counter = 0;
     intersection = false;
-    column.SetStartingColumnCoordinates();
-    bird.SetStartingBirdCoordinates();
+    column->SetStartingColumnCoordinates();
+    bird->SetStartingBirdCoordinates();
     StartGame();
 }
 
 void FlappyBird::SetMainBackgroundImage(const QImage &image)
 {
-    main_background_image = image;
+    *main_background_image = image;
 }
 
 void FlappyBird::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
-    painter.fillRect(0, 0, this->width(), this->height(), main_background_image);
-    column.DrawColumns(&painter);
-    bird.DrawBird(&painter);
-    basement.DrawBasement(&painter);
+    painter.fillRect(0, 0, this->width(), this->height(), *main_background_image);
+    column->DrawColumns(&painter);
+    bird->DrawBird(&painter);
+    basement->DrawBasement(&painter);
     if(!death)
     {
-        bird.BirdAnimation();
+        bird->BirdAnimation();
     }
-    
     score = QString("%1").arg(counter);
     QFont font35("Courier", 35, QFont::DemiBold);
     painter.setFont(font35);
@@ -119,7 +133,6 @@ void FlappyBird::paintEvent(QPaintEvent *event)
         best_score = QString("%1").arg(counter_for_best_score);
         for(int i = 0; i < phrases.size(); i++)
         {
-            phrases[i] = QString("%1").arg(phrases[i]);
             painter.drawText(250, 200+i*45, phrases[i]);
         }
         painter.drawText(500, 245, score);
@@ -129,12 +142,9 @@ void FlappyBird::paintEvent(QPaintEvent *event)
 
 void FlappyBird::keyPressEvent(QKeyEvent *event)
 {
-    if(!intersection)
+    if(!intersection && event->key() == Qt::Key_Space)
     {
-        if(event->key() == Qt::Key_Space)
-        {
-            bird.bird_pace = bird.height_of_jump;
-        }
+        bird->bird_pace = bird->height_of_jump;
     }
 }
 
@@ -181,18 +191,18 @@ void FlappyBird::on_SettingsButton_clicked()
 
 void FlappyBird::SlotForHeightOfJump(int height_of_jump)
 {
-    bird.SetHeightOfJump(height_of_jump);
+    bird->SetHeightOfJump(height_of_jump);
 }
 
 void FlappyBird::SlotForColumnPace(int pace)
 {
-    basement.SetBasementPace(pace);
-    column.SetColumnPace(pace);
+    basement->SetBasementPace(pace);
+    column->SetColumnPace(pace);
 }
 
 void FlappyBird::SlotForBirdPaceOfFall(int pace)
 {
-    bird.SetBirdPaceOfFall(pace);
+    bird->SetBirdPaceOfFall(pace);
 }
 
 void FlappyBird::SlotForBackgroundImage(const QImage &image)
@@ -208,10 +218,10 @@ void FlappyBird::SlotForColumnPictures(const std::vector<QString> &pictures)
         QImage image(pictures[i]);
         c_pictures.push_back(image);
     }
-    column.SetColumnPictures(c_pictures);
+    column->SetColumnPictures(c_pictures);
 }
 
 void FlappyBird::SlotForSettingBirdPictures(const std::vector<QString> &pictures)
 {
-   bird.bird_images = pictures;
+   bird->bird_images = pictures;
 }
