@@ -32,7 +32,7 @@
      <x>30</x>
      <y>440</y>
      <width>271</width>
-     <height>71</height>
+     <height>81</height>
     </rect>
    </property>
    <property name="text">
@@ -100,7 +100,7 @@
      <string>Choose picture</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="ClearButton">
+   <widget class="QPushButton" name="ClearBirdListButton">
     <property name="geometry">
      <rect>
       <x>210</x>
@@ -133,33 +133,23 @@
      <x>360</x>
      <y>400</y>
      <width>411</width>
-     <height>141</height>
+     <height>181</height>
     </rect>
    </property>
    <property name="title">
-    <string>Column pictures</string>
+    <string>Column pictures ( first - lower, second - upper)</string>
    </property>
-   <widget class="QLineEdit" name="LineForUpperColumnPicture">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>20</y>
-      <width>391</width>
-      <height>31</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QPushButton" name="ChangeColumnPicturesButton">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>100</y>
-      <width>191</width>
+      <y>140</y>
+      <width>391</width>
       <height>31</height>
      </rect>
     </property>
     <property name="text">
-     <string>Change picture</string>
+     <string>Set pictures</string>
     </property>
    </widget>
    <widget class="QPushButton" name="ClearColumnPicturesButton">
@@ -175,14 +165,27 @@
      <string>Clear all</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="LineForLowerColumnPicture">
+   <widget class="QListView" name="ColumnPicturesListView">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>60</y>
+      <y>30</y>
       <width>391</width>
+      <height>61</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ChooseColumnPicturesButton">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>100</y>
+      <width>191</width>
       <height>31</height>
      </rect>
+    </property>
+    <property name="text">
+     <string>Choose picture</string>
     </property>
    </widget>
   </widget>
@@ -190,57 +193,61 @@
    <property name="geometry">
     <rect>
      <x>360</x>
-     <y>50</y>
+     <y>30</y>
      <width>411</width>
-     <height>111</height>
+     <height>131</height>
     </rect>
    </property>
    <property name="title">
     <string>Background image</string>
    </property>
-   <widget class="QLineEdit" name="LineForBackground">
+   <widget class="QPushButton" name="SetBackgroundButton">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>30</y>
-      <width>411</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="locale">
-     <locale language="English" country="UnitedStates"/>
-    </property>
-    <property name="inputMethodHints">
-     <set>Qt::ImhNone</set>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="ButtonForBackground">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>70</y>
-      <width>201</width>
+      <x>10</x>
+      <y>90</y>
+      <width>141</width>
       <height>31</height>
      </rect>
     </property>
     <property name="text">
-     <string>Change background</string>
+     <string>Set background</string>
     </property>
    </widget>
    <widget class="QPushButton" name="ClearBackgroundButton">
     <property name="geometry">
      <rect>
-      <x>210</x>
-      <y>70</y>
-      <width>201</width>
+      <x>300</x>
+      <y>90</y>
+      <width>101</width>
       <height>31</height>
      </rect>
     </property>
     <property name="text">
      <string>Clear</string>
+    </property>
+   </widget>
+   <widget class="QListView" name="BackgroundListView">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>391</width>
+      <height>51</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ChooseBackgroundButton">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>90</y>
+      <width>131</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Choose picture</string>
     </property>
    </widget>
   </widget>
