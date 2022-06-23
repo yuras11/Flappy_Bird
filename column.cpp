@@ -2,10 +2,8 @@
 
 Column::Column(): distance(-50), column_pace(-4)
 {
-    QImage lower_image("C:/Users/Yuriy Kozlov/Documents/flappybird/lower-pipe-green.png");
-    column_pictures.push_back(lower_image);
-    QImage upper_image("C:/Users/Yuriy Kozlov/Documents/flappybird/pipe-green.png");
-    column_pictures.push_back(upper_image);
+    column_pictures.push_back("C:/Users/Yuriy Kozlov/Documents/flappybird/lower-pipe-green.png");
+    column_pictures.push_back("C:/Users/Yuriy Kozlov/Documents/flappybird/pipe-green.png");
 
     distance = -50;
     std::random_device rdGen;
@@ -21,20 +19,22 @@ Column::Column(): distance(-50), column_pace(-4)
 
 void Column::DrawColumns(QPainter *painter)
 {
+    QImage lower_image(column_pictures[0]);
+    QImage upper_image(column_pictures[1]);
     for(int i = 0; i < points_for_columns.size(); i++)
     {
         upper_column.setX(points_for_columns[i].x()-25);
-        upper_column.setY(points_for_columns[i].y()-column_pictures[1].height());
-        upper_column.setHeight(column_pictures[1].height()-50);
+        upper_column.setY(points_for_columns[i].y()-upper_image.height());
+        upper_column.setHeight(upper_image.height()-50);
         upper_column.setWidth(70);
 
         lower_column.setX(points_for_columns[i].x()-25);
         lower_column.setY(points_for_columns[i].y()+70);
-        lower_column.setHeight(column_pictures[0].height());
+        lower_column.setHeight(lower_image.height());
         lower_column.setWidth(70);
 
-        painter->drawImage(upper_column, column_pictures[1]);
-        painter->drawImage(lower_column, column_pictures[0]);
+        painter->drawImage(upper_column, upper_image);
+        painter->drawImage(lower_column, lower_image);
     }
 }
 
@@ -88,7 +88,7 @@ bool Column::IntersectionHappened(const Bird &bird)
     return false;
 }
 
-void Column::SetColumnPictures(const std::vector<QImage> &images)
+void Column::SetColumnPictures(const std::vector<QString> &images)
 {
     column_pictures = images;
 }
