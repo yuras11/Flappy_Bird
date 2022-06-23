@@ -85,8 +85,8 @@ void FlappyBird::IncreaseCounter()
 {
     for(int i = 0; i < 4; i++)
     {
-        if(!intersection && bird->point_for_bird->x() > column->points_for_columns[i].x()+column->column_pace-1 &&
-           bird->point_for_bird->x() < column->points_for_columns[i].x())
+        if(!intersection && bird->point_for_bird->x() > column->points_for_columns[i].x()+column->column_pace+39 &&
+           bird->point_for_bird->x() < column->points_for_columns[i].x()+40)
         {
             counter++;
         }
