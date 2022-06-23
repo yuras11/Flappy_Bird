@@ -24,11 +24,11 @@ public:
 
     bool IntersectionHappened(const Bird &bird);
 
-    void SetColumnPictures(const std::vector<QImage> &images);
+    void SetColumnPictures(const std::vector<QString> &images);
 
 public:
     std::vector<QPoint> points_for_columns;
-    std::vector<QImage> column_pictures;
+    std::vector<QString> column_pictures;
     QRect upper_column, lower_column;
     int column_pace;
     int distance;
