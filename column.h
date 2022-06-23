@@ -22,11 +22,9 @@ public:
 
     void SetStartingColumnCoordinates();
 
-    bool IntersectionHappened(Bird &bird);
+    bool IntersectionHappened(const Bird &bird);
 
-    void IncreaseCounter(Bird &bird, bool &intersection, int &counter);
-
-    void SetColumnPictures(const std::vector<QImage> images);
+    void SetColumnPictures(const std::vector<QImage> &images);
 
 public:
     std::vector<QPoint> points_for_columns;
