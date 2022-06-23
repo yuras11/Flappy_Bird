@@ -15,7 +15,7 @@
 #include "bird.h"
 
 namespace Ui {
-class SettingsWindow;
+    class SettingsWindow;
 }
 
 class SettingsWindow : public QDialog
@@ -73,8 +73,8 @@ private:
     Ui::SettingsWindow *ui;
     std::vector<QString> phrases;
     std::vector<QFont> fonts;
-    QImage main_background_image;
-    Bird bird;
+    QImage* main_background_image;
+    Bird* bird;
     QStringList bird_pictures_list;
     QAbstractItemModel *model;
 };
