@@ -4,8 +4,9 @@
 SettingsWindow::SettingsWindow(QWidget *parent)
   : QDialog(parent)
   , ui(new Ui::SettingsWindow)
-  , main_background_image(new QImage("C:/Users/Yuriy Kozlov/Documents/flappybird/background-day.png"))
+  , main_background_image("C:/Users/Yuriy Kozlov/Documents/flappybird/background-day.png")
   , bird(new Bird)
+  , column(new Column)
 
 {
     phrases.push_back("Settings");
@@ -30,22 +31,33 @@ SettingsWindow::SettingsWindow(QWidget *parent)
     ui->PaceOfFallSlider->setValue(1);
 
     ui->BirdSkinListView->setViewMode(QListView::ListMode);
+    ui->BackgroundListView->setViewMode(QListView::ListMode);
 
     for(int i = 0; i < bird->bird_images.size(); i++)
     {
         bird_pictures_list << bird->bird_images[i];
     }
+    background_pics_list << main_background_image;
+    for(int i = 0; i < column->column_pictures.size(); i++)
+    {
+        column_pics_list << column->column_pictures[i];
+    }
 
-    model = new QStringListModel(bird_pictures_list, parent);
+    modelBird = new QStringListModel(bird_pictures_list, parent);
+    modelBackground = new QStringListModel(background_pics_list, parent);
+    modelColumns = new QStringListModel(column_pics_list, parent);
 
-    ui->BirdSkinListView->setModel(model);
+    ui->BirdSkinListView->setModel(modelBird);
+    ui->BackgroundListView->setModel(modelBackground);
+    ui->ColumnPicturesListView->setModel(modelColumns);
 
 }
 
 void SettingsWindow::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
-    painter.fillRect(0, 0, this->width(), this->height(), *main_background_image);
+    QImage back_image(main_background_image);
+    painter.fillRect(0, 0, this->width(), this->height(), back_image);
     painter.setFont(fonts[0]);
     painter.drawText(55, 50, phrases[0]);
     painter.setFont(fonts[1]);
@@ -54,17 +66,11 @@ void SettingsWindow::paintEvent(QPaintEvent *event)
     painter.drawText(ui->ColumnPaceSlider->x(), ui->ColumnPaceSlider->y()-15, phrases[2]);
     painter.setFont(fonts[1]);
     painter.drawText(ui->PaceOfFallSlider->x(), ui->PaceOfFallSlider->y()-15, phrases[3]);
-
 }
 
-void SettingsWindow::SetMainBackgroundImage(const QImage &image)
+void SettingsWindow::SetMainBackgroundImage(const QString &image)
 {
-    *main_background_image = image;
-}
-
-bool SettingsWindow::ColumnLinesAreEpmty()
-{
-    return ui->LineForLowerColumnPicture->text() == "" && ui->LineForUpperColumnPicture->text() == "";
+    main_background_image = image;
 }
 
 SettingsWindow::~SettingsWindow()
@@ -74,13 +80,13 @@ SettingsWindow::~SettingsWindow()
 
 void SettingsWindow::on_ReturnButton_clicked()
 {
-    if(!bird_pictures_list.isEmpty())
+    if(!bird_pictures_list.isEmpty() && !background_pics_list.isEmpty() && !column_pics_list.isEmpty())
     {
         this->hide();
     }
     else
     {
-        QMessageBox::critical(this, "Warning", "Cannot initialize the bird without any pictures");
+        QMessageBox::critical(this, "Warning", "Fill in empty fields!");
     }
 }
 
@@ -102,69 +108,23 @@ void SettingsWindow::on_PaceOfFallSlider_sliderMoved(int position)
     emit SignalForBirdPaceOfFall(position);
 }
 
-void SettingsWindow::on_ButtonForBackground_clicked()
-{
-    if(ui->LineForBackground->text() != "")
-    {
-        QString background = ui->LineForBackground->text();
-        QImage image(background);
-        SetMainBackgroundImage(image);
-        emit SignalForBackgroundImage(image);
-    }
-    else
-    {
-        QMessageBox::critical(this, "Warning", "Cannot initialize background without a picture");
-    }
-}
-
-void SettingsWindow::on_ClearBackgroundButton_clicked()
-{
-    ui->LineForBackground->clear();
-    ui->LineForBackground->grabKeyboard();
-}
-
-void SettingsWindow::on_ChangeColumnPicturesButton_clicked()
-{
-    std::vector<QString> pictures;
-
-    if(!ColumnLinesAreEpmty())
-    {
-        pictures.push_back(ui->LineForUpperColumnPicture->text());
-        pictures.push_back(ui->LineForLowerColumnPicture->text());
-
-        emit SignalForColumnPictures(pictures);
-    }
-    else
-    {
-        QMessageBox::critical(this, "Warning", "Cannot initialize columns without any pictures");
-    }
-}
-
-void SettingsWindow::on_ClearColumnPicturesButton_clicked()
-{
-    ui->LineForLowerColumnPicture->clear();
-    ui->LineForLowerColumnPicture->clear();
-}
-
 void SettingsWindow::on_ChooseBirdPictureButton_clicked()
 {
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open file"), QDir::currentPath());
     if(!fileName.isEmpty())
     {
         bird_pictures_list << fileName;
-        model = new QStringListModel(bird_pictures_list);
-        ui->BirdSkinListView->setModel(model);
+        modelBird = new QStringListModel(bird_pictures_list);
+        ui->BirdSkinListView->setModel(modelBird);
     }
-
 }
 
-void SettingsWindow::on_ClearButton_clicked()
+void SettingsWindow::on_ClearBirdListButton_clicked()
 {
     bird_pictures_list.clear();
-    model = new QStringListModel(bird_pictures_list);
-    ui->BirdSkinListView->setModel(model);
+    modelBird = new QStringListModel(bird_pictures_list);
+    ui->BirdSkinListView->setModel(modelBird);
 }
-
 
 void SettingsWindow::on_SetBirdSkinButton_clicked()
 {
@@ -174,13 +134,87 @@ void SettingsWindow::on_SetBirdSkinButton_clicked()
     {
         QMessageBox::critical(this, "Warning", "Cannot initialize the bird without any pictures");
     }
-
-    if(!bird_pictures_list.isEmpty())
+    else
     {
         for(int i = 0; i < bird_pictures_list.size(); i++)
         {
             pictures.push_back(bird_pictures_list[i]);
         }
         emit SignalForSettingBirdPictures(pictures);
+    }
+}
+
+void SettingsWindow::on_ChooseBackgroundButton_clicked()
+{
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open file"), QDir::currentPath());
+    if(!fileName.isEmpty())
+    {
+        background_pics_list << fileName;
+        modelBackground = new QStringListModel(background_pics_list);
+        ui->BackgroundListView->setModel(modelBackground);
+    }
+}
+
+void SettingsWindow::on_ClearBackgroundButton_clicked()
+{
+    background_pics_list.clear();
+    modelBackground = new QStringListModel(background_pics_list);
+    ui->BackgroundListView->setModel(modelBackground);
+}
+
+void SettingsWindow::on_SetBackgroundButton_clicked()
+{
+    if(background_pics_list.isEmpty())
+    {
+        QMessageBox::critical(this, "Warning", "Cannot initialize background without any pictures");
+    }
+    else if(background_pics_list.size() == 1)
+    {
+        emit SignalForBackgroundImage(background_pics_list[0]);
+        SetMainBackgroundImage(background_pics_list[0]);
+    }
+    else
+    {
+        QMessageBox::critical(this, "Warning", "Cannot initialize background with more than one picture");
+    }
+}
+
+void SettingsWindow::on_ChangeColumnPicturesButton_clicked()
+{
+    if(column_pics_list.isEmpty())
+    {
+        QMessageBox::critical(this, "Warning", "Cannot initialize columns without any pictures");
+
+    }
+    else if(column_pics_list.size() == 2)
+    {
+        std::vector<QString> pictures;
+        for(int i = 0; i < column_pics_list.size(); i++)
+        {
+            pictures.push_back(column_pics_list[i]);
+        }
+        emit SignalForColumnPictures(pictures);
+    }
+    else
+    {
+        QMessageBox::critical(this, "Warning", "Cannot initialize columns with more or less than 2 pictures");
+    }
+}
+
+void SettingsWindow::on_ClearColumnPicturesButton_clicked()
+{
+    column_pics_list.clear();
+    modelColumns = new QStringListModel(column_pics_list);
+    ui->ColumnPicturesListView->setModel(modelColumns);
+}
+
+void SettingsWindow::on_ChooseColumnPicturesButton_clicked()
+{
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open file"), QDir::currentPath());
+    if(!fileName.isEmpty())
+    {
+        column_pics_list << fileName;
+        modelColumns = new QStringListModel(column_pics_list);
+        ui->ColumnPicturesListView->setModel(modelColumns);
     }
 }
