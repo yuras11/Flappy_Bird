@@ -22,7 +22,7 @@ public:
 public:
     std::vector<QPoint> points_for_basement;
     QRect rect_for_basement;
-    QImage image_for_basement;
+    QImage* image_for_basement;
     int basement_pace;
 };
 
