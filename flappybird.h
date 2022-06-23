@@ -67,7 +67,7 @@ public slots:
 
     void SlotForBirdPaceOfFall(int pace);
 
-    void SlotForBackgroundImage(const QImage &image);
+    void SlotForBackgroundImage(const QString &image);
 
     void SlotForColumnPictures(const std::vector<QString> &pictures);
 
