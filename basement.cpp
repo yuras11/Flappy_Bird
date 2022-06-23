@@ -1,6 +1,6 @@
 #include "basement.h"
 
-Basement::Basement(): image_for_basement("C:/Users/Yuriy Kozlov/Documents/flappybird/basement.png"), basement_pace(-4)
+Basement::Basement(): image_for_basement(new QImage("C:/Users/Yuriy Kozlov/Documents/flappybird/basement.png")), basement_pace(-4)
 {
     for(int i = 0; i < 2; i++)
     {
@@ -18,7 +18,7 @@ void Basement::DrawBasement(QPainter* painter)
         rect_for_basement.setWidth(810);
         rect_for_basement.setHeight(100);
 
-        painter->drawImage(rect_for_basement, image_for_basement);
+        painter->drawImage(rect_for_basement, *image_for_basement);
     }
 }
 
