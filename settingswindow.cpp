@@ -4,7 +4,8 @@
 SettingsWindow::SettingsWindow(QWidget *parent)
   : QDialog(parent)
   , ui(new Ui::SettingsWindow)
-  , main_background_image("C:/Users/Yuriy Kozlov/Documents/flappybird/background-day.png")
+  , main_background_image(new QImage("C:/Users/Yuriy Kozlov/Documents/flappybird/background-day.png"))
+  , bird(new Bird)
 
 {
     phrases.push_back("Settings");
@@ -30,46 +31,40 @@ SettingsWindow::SettingsWindow(QWidget *parent)
 
     ui->BirdSkinListView->setViewMode(QListView::ListMode);
 
-    for(int i = 0; i < bird.bird_images.size(); i++)
+    for(int i = 0; i < bird->bird_images.size(); i++)
     {
-        bird_pictures_list << bird.bird_images[i];
+        bird_pictures_list << bird->bird_images[i];
     }
 
     model = new QStringListModel(bird_pictures_list, parent);
+
     ui->BirdSkinListView->setModel(model);
+
 }
 
 void SettingsWindow::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
-
-    painter.fillRect(0, 0, this->width(), this->height(), main_background_image);
-
+    painter.fillRect(0, 0, this->width(), this->height(), *main_background_image);
     painter.setFont(fonts[0]);
-    phrases[0] = QString("%1").arg(phrases[0]);
     painter.drawText(55, 50, phrases[0]);
-
     painter.setFont(fonts[1]);
-    phrases[1] = QString("%1").arg(phrases[1]);
     painter.drawText(ui->HeightOfJumpSlider->x(), ui->HeightOfJumpSlider->y()-15, phrases[1]);
-
     painter.setFont(fonts[2]);
-    phrases[2] = QString("%1").arg(phrases[2]);
     painter.drawText(ui->ColumnPaceSlider->x(), ui->ColumnPaceSlider->y()-15, phrases[2]);
-
     painter.setFont(fonts[1]);
-    phrases[3] = QString("%1").arg(phrases[3]);
     painter.drawText(ui->PaceOfFallSlider->x(), ui->PaceOfFallSlider->y()-15, phrases[3]);
+
 }
 
 void SettingsWindow::SetMainBackgroundImage(const QImage &image)
 {
-    main_background_image = image;
+    *main_background_image = image;
 }
 
 bool SettingsWindow::ColumnLinesAreEpmty()
 {
-    return ui->LineForLowerColumnPicture->text() == "" && ui->LineForUpperColumnPicture->text() == "" ? true: false;
+    return ui->LineForLowerColumnPicture->text() == "" && ui->LineForUpperColumnPicture->text() == "";
 }
 
 SettingsWindow::~SettingsWindow()
@@ -169,6 +164,7 @@ void SettingsWindow::on_ClearButton_clicked()
     model = new QStringListModel(bird_pictures_list);
     ui->BirdSkinListView->setModel(model);
 }
+
 
 void SettingsWindow::on_SetBirdSkinButton_clicked()
 {
