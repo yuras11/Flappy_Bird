@@ -73,37 +73,22 @@ void Column::SetStartingColumnCoordinates()
     }
 }
 
-bool Column::IntersectionHappened(Bird &bird)
+bool Column::IntersectionHappened(const Bird &bird)
 {
     for(int i = 0; i < points_for_columns.size(); i++)
     {
-        if(bird.point_for_bird.x()+bird.radius >= points_for_columns[i].x()-25 && bird.point_for_bird.x() <= points_for_columns[i].x()+45)
+        if(bird.point_for_bird->x()+bird.radius >= points_for_columns[i].x()-25 &&
+           bird.point_for_bird->x() <= points_for_columns[i].x()+45 &&
+           (bird.point_for_bird->y()+bird.radius <= points_for_columns[i].y()-25 ||
+            bird.point_for_bird->y()+bird.radius >= points_for_columns[i].y()+70))
         {
-            if(bird.point_for_bird.y()+bird.radius <= points_for_columns[i].y()-25 ||
-               bird.point_for_bird.y()+bird.radius >= points_for_columns[i].y()+70)
-            {
-               return true;
-            }
+            return true;
         }
     }
     return false;
 }
 
-void Column::IncreaseCounter(Bird &bird, bool &intersection, int &counter)
-{
-    for(int i = 0; i < 4; i++)
-    {
-        if(!intersection)
-        {
-            if(bird.point_for_bird.x() > points_for_columns[i].x()+column_pace-1 && bird.point_for_bird.x() < points_for_columns[i].x())
-            {
-                 counter++;
-            }
-        }
-    }
-}
-
-void Column::SetColumnPictures(const std::vector<QImage> images)
+void Column::SetColumnPictures(const std::vector<QImage> &images)
 {
     column_pictures = images;
 }
