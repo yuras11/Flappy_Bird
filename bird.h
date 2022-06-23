@@ -19,7 +19,7 @@ public:
 
     void BirdAnimation();
 
-    void SetBirdImages(std::vector<QString> &skins);
+    void SetBirdImages(const std::vector<QString> &skins);
 
     void SetBirdPaceOfFall(int pace);
 
@@ -33,9 +33,9 @@ public:
 
 public:
     std::vector<QString> bird_images;
-    QPoint point_for_bird;
+    QPoint* point_for_bird;
     QString main_image;
-    int radius;
+    const int radius = 25;
     int index;
     int height_of_jump;
     int bird_pace;
