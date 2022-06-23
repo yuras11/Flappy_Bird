@@ -1,12 +1,12 @@
 #include "bird.h"
 
-Bird::Bird(): point_for_bird(200, 300), radius(25),
+Bird::Bird(): point_for_bird(new QPoint(200, 300)),
               index(0), height_of_jump(-10), bird_pace(-10),
               bird_pace_of_fall(1), starting_bird_pace(-2)
 {
     QString fileName("C:/Users/Yuriy Kozlov/Documents/flappybird/bird_pictures/yellow_bird/first.png");
     bird_images.push_back(fileName);
-    main_image = fileName;          
+    main_image = fileName;
     fileName = "C:/Users/Yuriy Kozlov/Documents/flappybird/bird_pictures/yellow_bird/second.png";
     bird_images.push_back(fileName);
     fileName = "C:/Users/Yuriy Kozlov/Documents/flappybird/bird_pictures/yellow_bird/third.png";
@@ -18,7 +18,7 @@ Bird::Bird(): point_for_bird(200, 300), radius(25),
 void Bird::DrawBird(QPainter *painter)
 {
     QImage main_image(this->main_image);
-    painter->drawImage(point_for_bird, main_image);
+    painter->drawImage(*point_for_bird, main_image);
 }
 
 void Bird::BirdAnimation()
@@ -28,7 +28,7 @@ void Bird::BirdAnimation()
     main_image = bird_images[index];
 }
 
-void Bird::SetBirdImages(std::vector<QString> &skins)
+void Bird::SetBirdImages(const std::vector<QString> &skins)
 {
     bird_images = skins;
 }
@@ -45,21 +45,21 @@ void Bird::SetHeightOfJump(int height)
 
 void Bird::SetStartingBirdCoordinates()
 {
-    point_for_bird.setX(200);
-    point_for_bird.setY(300);
+    point_for_bird->setX(200);
+    point_for_bird->setY(300);
     bird_pace = -10;
 }
 
 void Bird::MoveBird()
 {
-    point_for_bird.setY(point_for_bird.y() + bird_pace);
+    point_for_bird->setY(point_for_bird->y() + bird_pace);
     bird_pace += bird_pace_of_fall;
 }
 
 void Bird::MoveBirdBeforeStartingTheGame()
 {
-    point_for_bird.setY(point_for_bird.y() + starting_bird_pace);
-    if(point_for_bird.y() <= 285 || point_for_bird.y() >= 315)
+    point_for_bird->setY(point_for_bird->y() + starting_bird_pace);
+    if(point_for_bird->y() <= 285 || point_for_bird->y() >= 315)
     {
         starting_bird_pace = -starting_bird_pace;
     }
